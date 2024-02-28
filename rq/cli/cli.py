@@ -481,7 +481,11 @@ def worker_pool(
     sentry_ca_certs = sentry_ca_certs or settings.get('SENTRY_CA_CERTS')
     sentry_debug = sentry_debug or settings.get('SENTRY_DEBUG')
     sentry_dsn = sentry_dsn or settings.get('SENTRY_DSN')
+    dict_config = settings.get('DICT_CONFIG')
 
+    if dict_config:
+        logging.config.dictConfig(dict_config)
+        
     setup_loghandlers_from_args(verbose, quiet, date_format, log_format)
 
     if serializer:
